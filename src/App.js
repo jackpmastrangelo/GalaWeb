@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
 import { Route, Switch } from 'react-router-dom';
-import Home from './pages/Home';
-import Other from './pages/Other';
+import Landing from "./pages/Landing";
+import EventDash from "./pages/EventDash";
 
 class App extends Component {
   render() {
     return (
       <Switch>
-        <Route exact path="/" component={Home}/>
-        <Route path="/other" component={Other}/>
+        <Route exact path="/" component={Landing}/>
+        <Route path="/events" component={EventDash}/>
       </Switch>
     );
   }

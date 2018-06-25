@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { fetchEvents } from "../state/eventsReducer";
+import { fetchEvents } from "../state/eventState";
 
 class Home extends React.Component {
 
