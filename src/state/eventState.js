@@ -1,11 +1,9 @@
 import EventApi from '../api/gala/EventApi';
 
 //Action Types
-const EVENT_API_REQUEST = "EVENT_API_REQUEST",
-      EVENT_API_RESPONSE_OK = "EVENT_API_RESPONSE_OK",
-      EVENT_API_RESPONSE_NO_CONTENT = "EVENT_API_RESPONSE_NO_CONTENT",
-      EVENT_API_RESPONSE_NOT_FOUND = "EVENT_API_RESPONSE_NOT_FOUND",
-      EVENT_API_RESPONSE_ERROR = "EVENT_API_RESPONSE_ERROR";
+const EVENT_API_REQUEST = "EVENT_API_REQUEST", //Waiting for server response
+      EVENT_API_RESPONSE_OK = "EVENT_API_RESPONSE_OK", //Successful result
+      EVENT_API_RESPONSE_ERROR = "EVENT_API_RESPONSE_ERROR"; //Some unexpected error
 
 //Reducers
 //State for eventsReducer
@@ -25,15 +23,9 @@ export function eventsReducer(state = initialState, action) {
     case EVENT_API_RESPONSE_OK:
       return Object.assign({}, state, { fetching: false, events: action.events});
 
-    case EVENT_API_RESPONSE_NO_CONTENT:
-      return Object.assign({}, state, { fetching: false, events: []});
-
-    case EVENT_API_RESPONSE_NOT_FOUND:
-      return Object.assign({}, state, { fetching: false, error: true, errorMessage: "The user could not be found."});
-
     case EVENT_API_RESPONSE_ERROR:
       return Object.assign({}, state, { fetching: false, error: true,
-        errorMessage: "An error occured while fetching your events."});
+        errorMessage: "An error occurred while fetching your events."});
 
     default:
       return state;
@@ -50,17 +42,43 @@ export function fetchEvents(accountId) {
 
     dispatch({type: EVENT_API_REQUEST});
 
-    EventApi.retrieveUserEvents(accountId)
-      .then(response => {
-        if (response.status === 200) {
-          dispatch({type: EVENT_API_RESPONSE_OK, events: response.data})
-        } else if (response.status === 204) {
-          dispatch({type: EVENT_API_RESPONSE_NO_CONTENT})
-        } else if (response.status === 404) {
-          dispatch({type: EVENT_API_RESPONSE_NOT_FOUND})
-        } else {
-          dispatch({type: EVENT_API_RESPONSE_ERROR})
-        }
-      })
+    setTimeout(() => {
+      EventApi.retrieveUserEvents(accountId)
+        .then(response => {
+          //Success
+          dispatch(fetchEventsSuccessful(response.data))
+        })
+        .catch(error => {
+          //This means axios recieved an error response IE 404.
+          if (error.response) {
+            //We could use this space to differentiate between errors if need be.
+            //Clearly all the if statements are overkill for the same response, but these are for demonstration.
+            dispatch(fetchEventsError())
+          }
+          //This means the request was made successfully but no response ever returned IE timeout.
+          else if (error.request) {
+            dispatch(fetchEventsError())
+          }
+          //Well something real weird has happened
+          else {
+            dispatch(fetchEventsError())
+          }
+        })
+    }, 2000)
+    };
+}
+
+//Use this action when you've successfully received events
+export function fetchEventsSuccessful(events) {
+  return {
+    type: EVENT_API_RESPONSE_OK,
+    events: events
+  }
+}
+
+//Use this action when a generic error has occurred fetching the events.
+export function fetchEventsError() {
+  return {
+    type: EVENT_API_RESPONSE_ERROR
   }
 }

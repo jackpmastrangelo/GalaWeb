@@ -4,7 +4,10 @@ export default class EventApi {
 
   static retrieveUserEvents(accountId) {
     return galaAxios.get("/events/users", {
-      params: { accountId: accountId }
+      params: { accountId: accountId },
+      validateStatus: (status) => {
+        return status === 200
+      }
     });
   }
 
