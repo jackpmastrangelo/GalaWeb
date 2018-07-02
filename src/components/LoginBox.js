@@ -10,6 +10,8 @@ export default class LoginBox extends React.Component {
     }
   }
 
+
+
   handleFieldChange(event, field) {
     let change = {};
     change[field] = event.target.value;
@@ -27,7 +29,7 @@ export default class LoginBox extends React.Component {
         <input value={userNameField}
                onChange={(event) => this.handleFieldChange.bind(this)(event, "userNameField")} />
         <input value={passwordField}
-               onChange={(event) => this.handleFieldChange.bind(this)(event, "passwordField")}/>
+               onChange={(event) => this.handleFieldChange.bind(this)(event, "capacityField")}/>
         <div className={"button"}>
           <p>Go!</p>
         </div>

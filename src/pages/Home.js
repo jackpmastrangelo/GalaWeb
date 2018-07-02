@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { fetchEvents } from "../state/eventState";
+import { fetchEvents } from "../state/fetchEventsState";
 
 class Home extends React.Component {
 
@@ -8,14 +8,14 @@ class Home extends React.Component {
   }
 
   sendIT() {
-    this.props.dispatch(fetchEvents(1));
+    this.props.dispatch(fetchEvents());
   }
 
   sendIT = this.sendIT.bind(this);
 
   render() {
-    const loadingJsx = this.props.eventState.fetching ? <h2>Fetching</h2> : <h2>Not Fetching</h2>
-    const numEvents = this.props.eventState.events.length;
+    const loadingJsx = this.props.fetchEventsState.fetching ? <h2>Fetching</h2> : <h2>Not Fetching</h2>
+    const numEvents = this.props.fetchEventsState.events.length;
 
     return (
       <div>
@@ -26,7 +26,7 @@ class Home extends React.Component {
         </div>
         <div>
           <h3>{numEvents}</h3>
-          <h3>{ JSON.stringify(this.props.eventState.events) }</h3>
+          <h3>{ JSON.stringify(this.props.fetchEventsState.events) }</h3>
         </div>
       </div>
     )
@@ -35,7 +35,7 @@ class Home extends React.Component {
 
 function mapStateToProps(state) {
   return {
-    eventState: state.eventState
+    fetchEventsState: state.fetchEventsState
   }
 }
 

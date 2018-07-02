@@ -1,12 +1,12 @@
 import EventApi from '../api/gala/EventApi';
 
 //Action Types
-const EVENT_API_REQUEST = "EVENT_API_REQUEST", //Waiting for server response
-      EVENT_API_RESPONSE_OK = "EVENT_API_RESPONSE_OK", //Successful result
-      EVENT_API_RESPONSE_ERROR = "EVENT_API_RESPONSE_ERROR"; //Some unexpected error
+const FETCH_EVENTS_API_REQUEST = "FETCH_EVENTS_API_REQUEST", //Waiting for server response
+      FETCH_EVENTS_API_RESPONSE_OK = "FETCH_EVENTS_API_RESPONSE_OK", //Successful result
+      FETCH_EVENTS_API_RESPONSE_ERROR = "FETCH_EVENTS_API_RESPONSE_ERROR"; //Some unexpected error
 
 //Reducers
-//State for eventsReducer
+//State for fetchEventsReducer
 const initialState = {
   fetching: false,
   error: false,
@@ -14,16 +14,16 @@ const initialState = {
   events: []
 }
 
-export function eventsReducer(state = initialState, action) {
+export function fetchEventsReducer(state = initialState, action) {
 
   switch (action.type) {
-    case EVENT_API_REQUEST:
+    case FETCH_EVENTS_API_REQUEST:
       return Object.assign({}, state, { fetching: true });
 
-    case EVENT_API_RESPONSE_OK:
-      return Object.assign({}, state, { fetching: false, events: action.events});
+    case FETCH_EVENTS_API_RESPONSE_OK:
+      return Object.assign({}, state, { fetching: false, error: false, events: action.events});
 
-    case EVENT_API_RESPONSE_ERROR:
+    case FETCH_EVENTS_API_RESPONSE_ERROR:
       return Object.assign({}, state, { fetching: false, error: true,
         errorMessage: "An error occurred while fetching your events."});
 
@@ -35,15 +35,15 @@ export function eventsReducer(state = initialState, action) {
 //Actions
 //--------------------------------------
 
-export function fetchEvents(accountId) {
+export function fetchEvents() {
 
   //Thunk middleware will automatically pass dispatch.
   return function (dispatch) {
 
-    dispatch({type: EVENT_API_REQUEST});
+    dispatch(fetchEventsBegun());
 
     setTimeout(() => {
-      EventApi.retrieveUserEvents(accountId)
+      EventApi.retrieveUserEvents()
         .then(response => {
           //Success
           dispatch(fetchEventsSuccessful(response.data))
@@ -68,10 +68,17 @@ export function fetchEvents(accountId) {
     };
 }
 
+//Use this action to signify the api is being called
+export function fetchEventsBegun() {
+  return {
+    type: FETCH_EVENTS_API_REQUEST
+  }
+}
+
 //Use this action when you've successfully received events
 export function fetchEventsSuccessful(events) {
   return {
-    type: EVENT_API_RESPONSE_OK,
+    type: FETCH_EVENTS_API_RESPONSE_OK,
     events: events
   }
 }
@@ -79,6 +86,6 @@ export function fetchEventsSuccessful(events) {
 //Use this action when a generic error has occurred fetching the events.
 export function fetchEventsError() {
   return {
-    type: EVENT_API_RESPONSE_ERROR
+    type: FETCH_EVENTS_API_RESPONSE_ERROR
   }
 }

@@ -4,15 +4,10 @@ import LoadingSpinner from "../components/LoadingSpinner";
 import ErrorBox from "../components/ErrorBox";
 import NothingHere from "../components/NothingHere";
 import EventList from "../components/EventList";
-import { fetchEvents } from "../state/eventState";
+import { fetchEvents } from "../state/fetchEventsState";
 
 //Dashboard that shows a user's events and lets them select one.
 class EventDash extends React.Component {
-  constructor(props) {
-    super(props);
-
-  }
-
   componentDidMount() {
     this.props.dispatch(fetchEvents(1));
   }
@@ -44,10 +39,10 @@ class EventDash extends React.Component {
 
 function mapStateToProps(state) {
   return {
-    fetching: state.eventState.fetching,
-    events: state.eventState.events,
-    error: state.eventState.error,
-    errorMessage: state.eventState.errorMessage
+    fetching: state.fetchEventsState.fetching,
+    events: state.fetchEventsState.events,
+    error: state.fetchEventsState.error,
+    errorMessage: state.fetchEventsState.errorMessage
   }
 }
 
