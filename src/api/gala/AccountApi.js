@@ -9,7 +9,17 @@ export default class AccountApi {
         lastName: lastName,
         email: email,
         password: password
-      }
+      },
+      withCredentials: false
     });
+  }
+
+  static login(email, password) {
+    return galaAxios.post("/accounts/login", {}, {
+      auth: {
+        username: email,
+        password: password
+      }
+    })
   }
 }

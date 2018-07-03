@@ -17,10 +17,6 @@ export default class EventApi {
         place: place,
         eventTime: eventTime,
         capacity: capacity
-      },
-      auth: {
-        username: "j@j.com",
-        password: "password"
       }
     });
   }

@@ -1,4 +1,5 @@
 import AccountApi from '../api/gala/AccountApi';
+import { login } from './loginState';
 
 //Action Types
 const CREATE_ACCOUNT_REQUEST = "CREATE_ACCOUNT_REQUEST",
@@ -9,7 +10,8 @@ const CREATE_ACCOUNT_REQUEST = "CREATE_ACCOUNT_REQUEST",
 const initialState = {
   fetching: false,
   error: false,
-  errorMessage: ""
+  errorMessage: "",
+  success: false
 }
 
 export function createAccountReducer(state = initialState, action) {
@@ -18,7 +20,7 @@ export function createAccountReducer(state = initialState, action) {
       return Object.assign({}, state, { fetching: true });
 
     case CREATE_ACCOUNT_RESPONSE_OK:
-      return Object.assign({}, state, { fetching: false, error: false });
+      return Object.assign({}, state, { fetching: false, error: false, success: true });
     case CREATE_ACCOUNT_ERROR:
       return Object.assign({}, state, { fetching: false, error: true, message: action.message });
     default:
@@ -30,15 +32,15 @@ export function createAccountReducer(state = initialState, action) {
 export function createAccount(firstName, lastName, email, password) {
 
   return function (dispatch) {
-    dispatch(createAccountBegun())
+    dispatch(createAccountBegun());
 
     AccountApi.createAccount(firstName, lastName, email, password)
       .then(response => {
-        console.log(response)
-        dispatch(createAccountSuccess())
+        dispatch(login(email, password));
+        dispatch(createAccountSuccess());
       })
       .catch(error => {
-        dispatch(createAccountError("There was an error making your account."))
+        dispatch(createAccountError("There was an error making your account."));
       })
   }
 }

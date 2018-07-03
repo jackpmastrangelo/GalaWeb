@@ -7,7 +7,8 @@ export default class TicketApi {
       params: {
         eventId: eventId,
         email: email
-      }
+      },
+      withCredentials: false
     });
   }
 

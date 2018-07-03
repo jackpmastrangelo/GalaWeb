@@ -42,29 +42,27 @@ export function fetchEvents() {
 
     dispatch(fetchEventsBegun());
 
-    setTimeout(() => {
-      EventApi.retrieveUserEvents()
-        .then(response => {
-          //Success
-          dispatch(fetchEventsSuccessful(response.data))
-        })
-        .catch(error => {
-          //This means axios recieved an error response IE 404.
-          if (error.response) {
-            //We could use this space to differentiate between errors if need be.
-            //Clearly all the if statements are overkill for the same response, but these are for demonstration.
-            dispatch(fetchEventsError())
-          }
-          //This means the request was made successfully but no response ever returned IE timeout.
-          else if (error.request) {
-            dispatch(fetchEventsError())
-          }
-          //Well something real weird has happened
-          else {
-            dispatch(fetchEventsError())
-          }
-        })
-    }, 2000)
+    EventApi.retrieveUserEvents()
+      .then(response => {
+        //Success
+        dispatch(fetchEventsSuccessful(response.data))
+      })
+      .catch(error => {
+        //This means axios recieved an error response IE 404.
+        if (error.response) {
+          //We could use this space to differentiate between errors if need be.
+          //Clearly all the if statements are overkill for the same response, but these are for demonstration.
+          dispatch(fetchEventsError())
+        }
+        //This means the request was made successfully but no response ever returned IE timeout.
+        else if (error.request) {
+          dispatch(fetchEventsError())
+        }
+        //Well something real weird has happened
+        else {
+          dispatch(fetchEventsError())
+        }
+      })
     };
 }
 
