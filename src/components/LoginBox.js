@@ -46,7 +46,7 @@ class LoginBox extends React.Component {
           <input value={passwordField}
                  onChange={(event) => this.handleFieldChange.bind(this)(event, "passwordField")} />
           <div className={"button"} onClick={() => { this.handleLogin.bind(this)(userNameField, passwordField)}} >
-            <p>Go!</p>
+            <button>Go!</button>
           </div>
           {errorRender}
         </div>

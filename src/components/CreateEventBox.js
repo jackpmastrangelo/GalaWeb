@@ -36,17 +36,21 @@ class CreateEventBox extends React.Component {
       <div className={"signup-box"}>
         <h2>Creating an event!</h2>
         <h3>Please enter event information below:</h3>
+          <label>Name</label>
         <input value={eventNameField}
                onChange={(event) => this.handleFieldChange.bind(this)(event, "eventNameField")}/>
+          <label>Place</label>
         <input value={eventPlaceField}
                onChange={(event) => this.handleFieldChange.bind(this)(event, "eventPlaceField")}/>
+          <label>Time (MM-DD-YYYY)</label>
         <input value={eventTimeField}
                onChange={(event) => this.handleFieldChange.bind(this)(event, "eventTimeField")}/>
+          <label>Capacity</label>
         <input value={capacityField}
                onChange={(event) => this.handleFieldChange.bind(this)(event, "capacityField")}/>
         <div className={"button"}
              onClick={() => {this.createEvent.bind(this)(eventNameField, eventPlaceField, eventTimeField, capacityField)}}>
-          <p>Go!</p>
+          <button>Go!</button>
         </div>
         { loading }
       </div>
