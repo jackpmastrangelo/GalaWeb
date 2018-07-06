@@ -53,7 +53,7 @@ class SignUpBox extends React.Component {
                onChange={(event) => this.handleFieldChange.bind(this)(event, "passwordField")}/>
         <div className={"button"}
               onClick={() => {this.createAccount.bind(this)(firstNameField, lastNameField, emailField, passwordField)}}>
-          <p>Go!</p>
+          <button>Go!</button>
         </div>
         { loading }
       </div>
