@@ -23,6 +23,13 @@ class TicketRequest extends React.Component {
 
   render() {
     const event = this.props.event;
+    let informationText = undefined;
+
+    if (this.props.success) {
+      informationText = "Success! A ticket was sent to your email.";
+    } else if (this.props.error) {
+      informationText = this.props.errorMessage;
+    }
 
     return (
       <div className="tr-container">
@@ -42,6 +49,9 @@ class TicketRequest extends React.Component {
             <div className="tr-form-submit" onClick={() => this.requestTicket()}>
               <p>Give me a ticket!</p>
             </div>
+          </div>
+          <div className="tr-information">
+            {informationText}
           </div>
         </div>
       </div>
