@@ -1,0 +1,95 @@
+@import "../variables";
+
+.create-event {
+  margin-top: 12px;
+  border-radius: 8px;
+
+  &.editing {
+    width: 100%;
+
+    .create-event-button {
+      display: none;
+    }
+    .create-event-box {
+      display: block;
+    }
+  }
+}
+
+.create-event-button {
+  color: white;
+  background-color: $primary-color;
+  border-radius: 24px;
+  box-shadow: $bottom-right-shadow;
+
+  p {
+    margin: 0;
+    padding: 12px;
+  }
+}
+
+.create-event-box {
+  background-color: $primary-color;
+  border: 1px solid #000000;
+  border-radius: 4px 4px 8px 8px;
+  padding: 8px 16px;
+  color: white;
+  box-shadow: $bottom-right-shadow;
+  display: none;
+}
+
+.ce-row {
+  display: flex;
+  justify-content: space-between;
+  margin: 12px 0;
+}
+
+.ce-input-container {
+  input, textarea {
+    box-shadow: none;
+    background-color: $primary-light;
+    border: 1px solid black;
+    font-size: 16px;
+    padding: 0;
+  }
+  textarea {
+    border: 1px solid black;
+    height: 124px;
+  }
+}
+
+.ce-input-container.stub {
+  input, textarea {
+    width: 60px;
+  }
+}
+
+.ce-input-container.short {
+  input, textarea {
+  }
+}
+
+.ce-input-container.long {
+  width: 100%;
+  input, textarea {
+    width: calc(100% - 1px);
+  }
+}
+
+.ce-subtext {
+  margin: 0;
+  font-size: 12px;
+  font-weight: 200;
+}
+
+.ce-row.submit {
+  justify-content: flex-end;
+}
+
+.ce-submit {
+  border: 1px solid black;
+  border-radius: 4px;
+  background-color: $primary-dark;
+  padding: 8px;
+  box-shadow: $bottom-right-shadow;
+}

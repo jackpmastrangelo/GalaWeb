@@ -1,0 +1,53 @@
+@import "../variables";
+
+.ticket-request {
+  padding: 12px 24px 12px 12px;
+}
+
+.tr-form {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  background-color: $primary-color;
+  padding: 12px;
+  border-radius: 4px 4px 8px 8px;
+  box-shadow: $bottom-right-shadow;
+  color: white;
+  font-size: 24px;
+
+  p {
+    margin: 0;
+    padding: 0;
+    margin-right: 12px;
+    height: 36px;
+  }
+
+  input {
+    height: 40px;
+    background-color: $primary-light;
+    border: 1px solid black;
+    padding: 0 0 0 8px;
+    width: 400px;
+    font-size: 24px;
+    border-radius: 4px;
+  }
+}
+
+.tr-form-submit {
+  background-color: $primary-dark;
+  border-radius: 24px;
+  padding: 4px;
+  font-size: 16px;
+  height: 36px;
+  box-shadow: $bottom-right-shadow;
+
+  p {
+    padding: 5px;
+    margin: 0;
+  }
+}
+
+.tr-form-input-container {
+  display: flex;
+  align-items: flex-end;
+}

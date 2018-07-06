@@ -1,5 +1,7 @@
 import React from 'react';
 import EventListItem from './EventListItem';
+import CreateEvent from './CreateEvent';
+import "../styles/components/EventList.scss"
 
 export default class EventList extends React.Component {
 
@@ -14,8 +16,9 @@ export default class EventList extends React.Component {
     });
 
     return (
-      <div className={"event-list"}>
+      <div className="event-list">
         {eventComponents}
+        <CreateEvent />
       </div>
     )
   }

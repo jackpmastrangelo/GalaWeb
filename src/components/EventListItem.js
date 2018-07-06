@@ -1,19 +1,32 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
+import { MdSubdirectoryArrowRight } from 'react-icons/lib/md';
+import "../styles/components/EventListItem.scss";
 
 export default class EventListItem extends React.Component {
-
-  //TODO Content
   render() {
     const event = this.props.event;
 
     return(
-      <div className={"event-list-item"}>
-        <h5>Event Name</h5>
-        <h6>{event.name}</h6>
-        <h5>Event Place</h5>
-        <h6>{event.place}</h6>
-        <h5>Event Capacity</h5>
-        <h6>{event.capacity}</h6>
+      <div className="eli-container">
+        <div className="event-list-item">
+          <div className="eli-row">
+            <p className="eli-text">
+              {event.name}
+            </p>
+            <p className="eli-text">
+              {event.eventTime}
+            </p>
+          </div>
+          <div className="eli-row">
+            <p className="eli-text">
+              {event.place}
+            </p>
+            <Link to={"/request-ticket/" + event.id} className="eli-link">
+              Request ticket link <MdSubdirectoryArrowRight />
+            </Link>
+          </div>
+        </div>
       </div>
     )
   }

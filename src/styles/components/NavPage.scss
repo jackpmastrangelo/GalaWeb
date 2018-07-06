@@ -1,0 +1,21 @@
+@import "../variables";
+
+.page {
+  height: 100%;
+}
+
+.main-background {
+  height: 100%;
+  background-color: $secondary-light;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.main-content {
+  width: 768px;
+  background-color: $secondary-color;
+  box-shadow: $bottom-right-shadow;
+  border-radius: 0px 0px 8px 8px;
+  padding-bottom: 20px;
+}
