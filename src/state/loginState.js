@@ -21,7 +21,7 @@ export function loginReducer(state=initialState, action) {
     case LOGIN_REQUEST:
       return Object.assign({}, state, { fetching: true, error: false });
     case LOGIN_RESPONSE_OK:
-      Session.setSession();
+      Session.setSession(action.token);
       return Object.assign({}, state, { fetching: false, error: false, success: true });
     case LOGIN_RESPONSE_ERROR:
       return Object.assign({}, state, { fetching: false, error: true, errorMessage: action.message, success: false });
@@ -37,7 +37,7 @@ export function login(email, password) {
 
     AccountApi.login(email, password)
       .then(response => {
-        dispatch(loginSuccessful());
+        dispatch(loginSuccessful(response.data));
       })
       .catch(error => {
         dispatch(loginError("Login was unsuccessful."));
@@ -51,9 +51,10 @@ export function loginBegun() {
   }
 }
 
-export function loginSuccessful() {
+export function loginSuccessful(token) {
   return {
-    type: LOGIN_RESPONSE_OK
+    type: LOGIN_RESPONSE_OK,
+    token: token
   }
 }
 

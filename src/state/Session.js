@@ -6,8 +6,13 @@ export default class Session {
     return !!cookies.get("gala-session");
   }
 
-  static setSession() {
+  static setSession(token) {
     const cookies = new Cookies();
-    cookies.set("gala-session", "true");
+    cookies.set("gala-session", token);
+  }
+
+  static getSessionValue() {
+    const cookies = new Cookies();
+    return cookies.get("gala-session");
   }
 }

@@ -3,23 +3,18 @@ import { galaAxios } from "./GalaApi";
 export default class AccountApi {
 
   static createAccount(firstName, lastName, email, password) {
-    return galaAxios.post("/accounts", {}, {
-      params: {
-        firstName: firstName,
-        lastName: lastName,
-        email: email,
-        password: password
-      },
-      withCredentials: false
+    return galaAxios.post("/accounts", {
+      firstName: firstName,
+      lastName: lastName,
+      email: email,
+      password: password
     });
   }
 
   static login(email, password) {
-    return galaAxios.post("/accounts/login", {}, {
-      auth: {
-        username: email,
-        password: password
-      }
-    })
+    return galaAxios.post("/accounts/login", {
+      email: email,
+      password: password
+    });
   }
 }

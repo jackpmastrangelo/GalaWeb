@@ -1,4 +1,5 @@
 import { galaAxios } from "./GalaApi";
+import Session from "../../state/Session";
 
 export default class EventApi {
 
@@ -6,6 +7,9 @@ export default class EventApi {
     return galaAxios.get("/events/users", {
       validateStatus: (status) => {
         return status === 200
+      },
+      headers: {
+        Authorization: ("Bearer " + Session.getSessionValue())
       }
     });
   }
@@ -17,6 +21,9 @@ export default class EventApi {
         place: place,
         eventTime: eventTime,
         capacity: capacity
+      },
+      headers: {
+        Authorization: ("Bearer " + Session.getSessionValue())
       }
     });
   }

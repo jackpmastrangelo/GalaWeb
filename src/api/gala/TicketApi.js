@@ -1,4 +1,5 @@
 import { galaAxios } from "./GalaApi";
+import Session from "../../state/Session";
 
 export default class TicketApi {
 
@@ -7,9 +8,7 @@ export default class TicketApi {
       params: {
         eventId: eventId,
         email: email
-      },
-      withCredentials: false
-    });
+      }});
   }
 
   static validateTicket(ticketId, eventId) {
@@ -17,6 +16,9 @@ export default class TicketApi {
       params: {
         ticketId: ticketId,
         eventId: eventId
+      },
+      headers: {
+        Authorization: ("Bearer " + Session.getSessionValue())
       }
     });
   }
