@@ -15,4 +15,9 @@ export default class Session {
     const cookies = new Cookies();
     return cookies.get("gala-session");
   }
+
+  static deleteSession() {
+    const cookies = new Cookies();
+    return cookies.remove("gala-session");
+  }
 }

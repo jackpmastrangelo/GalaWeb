@@ -5,7 +5,9 @@ import Session from "./Session";
 
 const LOGIN_REQUEST = "LOGIN_REQUEST",
       LOGIN_RESPONSE_OK = "LOGIN_RESPONSE_OK",
-      LOGIN_RESPONSE_ERROR = "LOGIN_RESPONSE_ERROR";
+      LOGIN_RESPONSE_ERROR = "LOGIN_RESPONSE_ERROR",
+      LOGOUT = "LOGOUT",
+      NEW_LOGIN = "NEW_LOGIN";
 
 //Reducer
 //Initial state of loginState
@@ -25,6 +27,12 @@ export function loginReducer(state=initialState, action) {
       return Object.assign({}, state, { fetching: false, error: false, success: true });
     case LOGIN_RESPONSE_ERROR:
       return Object.assign({}, state, { fetching: false, error: true, errorMessage: action.message, success: false });
+    case LOGOUT:
+      Session.deleteSession();
+      return Object.assign({}, state, { fetching: false, error: false, success: false });
+    case NEW_LOGIN:
+      Session.setSession(action.token);
+      return Object.assign({}, state, { fetching: false, error: false, success: true });
     default:
       return state;
   }
@@ -62,5 +70,18 @@ export function loginError(message) {
   return {
     type: LOGIN_RESPONSE_ERROR,
     message: message
+  }
+}
+
+export function logout() {
+  return {
+    type: LOGOUT,
+  }
+}
+
+export function newLogin(token) {
+  return {
+    type: NEW_LOGIN,
+    token: token
   }
 }

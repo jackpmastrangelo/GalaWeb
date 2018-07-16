@@ -1,5 +1,5 @@
 import AccountApi from '../api/gala/AccountApi';
-import Session from './Session';
+import { newLogin } from "./loginState";
 
 //Action Types
 const CREATE_ACCOUNT_REQUEST = "CREATE_ACCOUNT_REQUEST",
@@ -19,7 +19,6 @@ export function createAccountReducer(state = initialState, action) {
     case CREATE_ACCOUNT_REQUEST:
       return Object.assign({}, state, { fetching: true });
     case CREATE_ACCOUNT_RESPONSE_OK:
-      Session.setSession(action.token);
       return Object.assign({}, state, { fetching: false, error: false, success: true });
     case CREATE_ACCOUNT_ERROR:
       return Object.assign({}, state, { fetching: false, error: true, message: action.message });
@@ -36,7 +35,8 @@ export function createAccount(firstName, lastName, email, password) {
 
     AccountApi.createAccount(firstName, lastName, email, password)
       .then(response => {
-        dispatch(createAccountSuccess(response.data));
+        dispatch(newLogin(response.data));
+        dispatch(createAccountSuccess());
       })
       .catch(error => {
         dispatch(createAccountError("There was an error making your account."));
@@ -52,10 +52,9 @@ export function createAccountBegun() {
 }
 
 //Use this to signify the account creation Api call was successful
-export function createAccountSuccess(token) {
+export function createAccountSuccess() {
   return {
-    type: CREATE_ACCOUNT_RESPONSE_OK,
-    token: token
+    type: CREATE_ACCOUNT_RESPONSE_OK
   }
 }
 
