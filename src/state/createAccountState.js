@@ -12,7 +12,7 @@ const initialState = {
   error: false,
   errorMessage: "",
   success: false
-}
+};
 
 export function createAccountReducer(state = initialState, action) {
   switch (action.type) {
