@@ -1,7 +1,7 @@
 import { createStore, combineReducers, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
 import { createLogger } from 'redux-logger';
-import Session from './Session';
+import { Session, sessionReducer } from './Session';
 import { fetchEventsReducer } from "./fetchEventsState";
 import { createAccountReducer } from "./createAccountState";
 import { createEventReducer } from "./createEventsState";
@@ -26,7 +26,8 @@ const appReducer = combineReducers({
   createEventState: createEventReducer,
   loginState: loginReducer,
   fetchEventDetailsState: fetchEventDetailsReducer,
-  requestTicketState: requestTicketReducer
+  requestTicketState: requestTicketReducer,
+  sessionState: sessionReducer
 });
 
 const rootReducer = (state, action) => {

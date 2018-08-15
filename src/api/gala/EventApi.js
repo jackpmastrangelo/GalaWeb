@@ -1,5 +1,5 @@
 import { galaAxios } from "./GalaApi";
-import Session from "../../state/Session";
+import { Session } from "../../state/Session";
 
 export default class EventApi {
 

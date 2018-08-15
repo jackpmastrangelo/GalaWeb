@@ -2,6 +2,7 @@ import React from 'react';
 import {connect} from "react-redux";
 import '../styles/components/CreateEvent.scss'
 import {createEvent, beginEditingEvent} from "../state/createEventsState";
+import { Redirect } from 'react-router';
 
 class CreateEvent extends React.Component {
   constructor(props) {
@@ -34,6 +35,10 @@ class CreateEvent extends React.Component {
 
   render() {
     const editingClass = this.props.editing ? " editing" : "";
+
+    if (this.props.credentialsExpired) {
+      return <Redirect to={{ pathname: "/reauth", destination: this.props.location.pathname}}/>
+    }
 
     return(
       <div className={"create-event" + editingClass}>
@@ -99,7 +104,8 @@ class CreateEvent extends React.Component {
 function mapStateToProps(state) {
   return {
     fetching: state.createEventState.fetching,
-    editing: state.createEventState.editing
+    editing: state.createEventState.editing,
+    credentialsExpired: state.sessionState.credentialsExpired
   }
 }
 

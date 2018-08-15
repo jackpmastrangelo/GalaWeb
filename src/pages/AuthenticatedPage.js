@@ -2,7 +2,7 @@ import React from 'react';
 import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import LoadingSpinner from "../components/LoadingSpinner";
-import Session from '../state/Session';
+import { Session } from '../state/Session';
 
 class AuthenticatedPage extends React.Component {
   render() {
@@ -23,7 +23,7 @@ class AuthenticatedPage extends React.Component {
         </div>
       )
     } else {
-      renderComponent = <Redirect to="/"/>
+      renderComponent = <Redirect to={{ pathname: "/reauth", destination: this.props.location.pathname }}/>
     }
 
     return(

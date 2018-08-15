@@ -18,7 +18,7 @@ export default class EventList extends React.Component {
     return (
       <div className="event-list">
         {eventComponents}
-        <CreateEvent />
+        <CreateEvent location={this.props.location}/>
       </div>
     )
   }

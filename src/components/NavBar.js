@@ -1,5 +1,5 @@
 import React from 'react';
-import Session from "../state/Session";
+import { Session } from "../state/Session";
 import { NavLink } from 'react-router-dom';
 import '../styles/components/NavBar.scss';
 import { globalStateReset } from "../state/galaStore";

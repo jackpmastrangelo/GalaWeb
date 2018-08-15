@@ -1,7 +1,7 @@
 
 //Action Types
 import AccountApi from "../api/gala/AccountApi";
-import Session from "./Session";
+import { Session, sessionNewCredentials } from "./Session";
 
 const LOGIN_REQUEST = "LOGIN_REQUEST",
       LOGIN_RESPONSE_OK = "LOGIN_RESPONSE_OK",
@@ -46,6 +46,7 @@ export function login(email, password) {
     AccountApi.login(email, password)
       .then(response => {
         dispatch(loginSuccessful(response.data));
+        dispatch(sessionNewCredentials());
       })
       .catch(error => {
         dispatch(loginError("Login was unsuccessful."));

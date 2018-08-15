@@ -19,11 +19,11 @@ class Dashboard extends React.Component {
     } else if (this.props.error) {
       renderComponent = <div>{this.props.errorMessage}</div>
     } else {
-      renderComponent = <EventList events={this.props.events}/>
+      renderComponent = <EventList events={this.props.events} location={"/dashboard"}/>
     }
 
     return (
-      <NavPage>
+      <NavPage secured={true} credentialsExpired={this.props.credentialsExpired}>
         {renderComponent}
       </NavPage>
     );
@@ -35,7 +35,8 @@ function mapStateToProps(state) {
     fetching: state.fetchEventsState.fetching,
     events: state.fetchEventsState.events,
     error: state.fetchEventsState.error,
-    errorMessage: state.fetchEventsState.errorMessage
+    errorMessage: state.fetchEventsState.errorMessage,
+    credentialsExpired: state.sessionState.credentialsExpired
   }
 }
 

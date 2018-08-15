@@ -5,6 +5,7 @@ import EventDash from "./pages/Dashboard";
 import AuthenticatedPage from "./pages/AuthenticatedPage";
 import SignUp from "./pages/SignUp";
 import TicketRequestPage from "./pages/TicketRequestPage";
+import ReAuth from "./pages/ReAuth";
 
 class App extends Component {
   render() {
@@ -14,6 +15,8 @@ class App extends Component {
         <Route path="/signup" component={SignUp} />
         <Route path="/dashboard"
                render={(props) => <AuthenticatedPage {...props} subComponent={<EventDash />} />} />
+        <Route path="/reauth"
+               component={ReAuth} />
         <Route path="/request-ticket/:eventId" component={TicketRequestPage} />
       </Switch>
     );

@@ -1,5 +1,6 @@
 import EventApi from "../api/gala/EventApi";
 import { fetchEvents } from "./fetchEventsState";
+import { sessionCredentialsExpired } from './Session';
 
 //Action Types
 const CREATE_EVENT_API_REQUEST = "CREATE_EVENT_API_REQUEST",
@@ -49,7 +50,11 @@ export function createEvent(name, place, eventTime, capacity) {
         dispatch(fetchEvents());
       })
       .catch(error => {
-        dispatch(createEventError("There was an error creating your event"))
+        if (error.response && error.response.status === 403) {
+          dispatch(sessionCredentialsExpired());
+        } else {
+          dispatch(createEventError("There was an error creating your event"));
+        }
       })
   }
 }

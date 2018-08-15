@@ -2,12 +2,12 @@ import React from 'react';
 import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux'
 import { login } from "../state/loginState";
-import Session from "../state/Session";
+import { Session } from "../state/Session";
 
 //This component is a standard login component for Gala.
 class LoginBox extends React.Component {
   constructor(props) {
-    super(props)
+    super(props);
     this.state = {
       userNameField: "Username",
       passwordField: "Password"
@@ -36,7 +36,7 @@ class LoginBox extends React.Component {
 
     return(
       success ?
-      <Redirect to="/dashboard" />
+      <Redirect to={this.props.destination} />
       : (
         <div className="login-box">
           <h2>Welcome to Gala!</h2>

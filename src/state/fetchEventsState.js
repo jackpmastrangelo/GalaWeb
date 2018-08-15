@@ -1,4 +1,5 @@
 import EventApi from '../api/gala/EventApi';
+import { sessionCredentialsExpired } from './Session';
 
 //Action Types
 const FETCH_EVENTS_API_REQUEST = "FETCH_EVENTS_API_REQUEST", //Waiting for server response
@@ -12,7 +13,7 @@ const initialState = {
   error: false,
   errorMessage: "",
   events: []
-}
+};
 
 export function fetchEventsReducer(state = initialState, action) {
 
@@ -52,15 +53,18 @@ export function fetchEvents() {
         if (error.response) {
           //We could use this space to differentiate between errors if need be.
           //Clearly all the if statements are overkill for the same response, but these are for demonstration.
-          dispatch(fetchEventsError())
+          if (error.response.status === 403) {
+            dispatch(sessionCredentialsExpired());
+          }
+          dispatch(fetchEventsError());
         }
         //This means the request was made successfully but no response ever returned IE timeout.
         else if (error.request) {
-          dispatch(fetchEventsError())
+          dispatch(fetchEventsError());
         }
         //Well something real weird has happened
         else {
-          dispatch(fetchEventsError())
+          dispatch(fetchEventsError());
         }
       })
     };

@@ -9,7 +9,7 @@ export default class Landing extends React.Component {
     return (
       <div className="landing-main">
         <NavBar />
-        <LoginBox />
+        <LoginBox destination={"/dashboard"}/>
       </div>
     )
   }
