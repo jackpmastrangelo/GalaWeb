@@ -4,6 +4,7 @@ import { fetchEvents } from "../state/fetchEventsState";
 import NavPage from "../components/NavPage";
 import EventList from "../components/EventList";
 import LoadingSpinner from "../components/LoadingSpinner";
+import { Redirect } from 'react-router';
 
 //Dashboard that shows a user's events and lets them select one.
 class Dashboard extends React.Component {
@@ -16,6 +17,8 @@ class Dashboard extends React.Component {
 
     if (this.props.fetching) {
       renderComponent = <LoadingSpinner/>
+    } else if (this.props.credentialsExpired) {
+      renderComponent = <Redirect to={{ pathname: "/reauth", destination: "/dashboard" }}/>
     } else if (this.props.error) {
       renderComponent = <div>{this.props.errorMessage}</div>
     } else {
@@ -23,7 +26,7 @@ class Dashboard extends React.Component {
     }
 
     return (
-      <NavPage secured={true} credentialsExpired={this.props.credentialsExpired}>
+      <NavPage>
         {renderComponent}
       </NavPage>
     );
