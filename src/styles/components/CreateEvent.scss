@@ -76,6 +76,13 @@
   }
 }
 
+.ce-input-container.datepicker {
+  input, textarea {
+    background-color: #ffffff;
+    border: none;
+  }
+}
+
 .ce-subtext {
   margin: 0;
   font-size: 12px;

@@ -14,14 +14,15 @@ export default class EventApi {
     });
   }
 
-  static createNewUserEvent(name, place, eventTime, capacity) {
-    return galaAxios.post("/events/users", {}, {
-      params: {
-        name: name,
-        place: place,
-        eventTime: eventTime,
-        capacity: capacity
-      },
+  static createNewUserEvent(name, place, startTime, endTime, capacity, description) {
+    return galaAxios.post("/events/users", {
+      name: name,
+      place: place,
+      startTime: startTime,
+      endTime: endTime,
+      capacity: capacity,
+      description: description
+    }, {
       headers: {
         Authorization: ("Bearer " + Session.getSessionValue())
       }

@@ -2,10 +2,13 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { MdSubdirectoryArrowRight } from 'react-icons/lib/md';
 import "../styles/components/EventListItem.scss";
+import Moment from 'moment';
 
 export default class EventListItem extends React.Component {
   render() {
     const event = this.props.event;
+
+    const startTime = new Moment(event.startTime);
 
     return(
       <div className="eli-container">
@@ -15,7 +18,7 @@ export default class EventListItem extends React.Component {
               {event.name}
             </p>
             <p className="eli-text">
-              {event.eventTime}
+              {startTime.format("lll")}
             </p>
           </div>
           <div className="eli-row">

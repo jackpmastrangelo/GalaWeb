@@ -37,12 +37,12 @@ export function createEventReducer(state = initialState, action) {
 }
 
 //Action Creators
-export function createEvent(name, place, eventTime, capacity) {
+export function createEvent(name, place, startTime, endTime, capacity, description) {
   return function(dispatch) {
 
     dispatch(createEventBegun());
 
-    EventApi.createNewUserEvent(name, place, eventTime, capacity)
+    EventApi.createNewUserEvent(name, place, startTime, endTime, capacity, description)
       .then(response => {
         dispatch(createEventSuccess(response.data));
         //When we successfully create a new event we should rerun fetch events so that anywhere in the application that

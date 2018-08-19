@@ -6,6 +6,9 @@ import AuthenticatedPage from "./pages/AuthenticatedPage";
 import SignUp from "./pages/SignUp";
 import TicketRequestPage from "./pages/TicketRequestPage";
 import ReAuth from "./pages/ReAuth";
+import 'react-dates/initialize';
+import 'react-dates/lib/css/_datepicker.css';
+import 'rc-time-picker/assets/index.css';
 
 class App extends Component {
   render() {
