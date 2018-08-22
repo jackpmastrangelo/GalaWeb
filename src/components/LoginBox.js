@@ -9,24 +9,28 @@ class LoginBox extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      userNameField: "Username",
-      passwordField: "Password"
+      email: "",
+      password: ""
     }
   }
 
-  handleLogin(email, password) {
-    this.props.dispatch(login(email, password));
-  }
+  handleLogin = (email, password) => {
+    if (email && password) {
+      this.props.dispatch(login(email, password));
+    } else {
 
-  handleFieldChange(event, field) {
+    }
+  };
+
+  handleFieldChange = (event, field) => {
     let change = {};
     change[field] = event.target.value;
     this.setState(change);
-  }
+  };
 
   render() {
-    const userNameField = this.state.userNameField,
-          passwordField = this.state.passwordField,
+    const email = this.state.email,
+          password = this.state.password,
           success = Session.sessionExists(),
           errorRender = this.props.error
             ? (<h4>
@@ -41,11 +45,14 @@ class LoginBox extends React.Component {
         <div className="login-box">
           <h2>Welcome to Gala!</h2>
           <h3>Please enter your login information below:</h3>
-          <input value={userNameField}
-                 onChange={(event) => this.handleFieldChange.bind(this)(event, "userNameField")} />
-          <input value={passwordField}
-                 onChange={(event) => this.handleFieldChange.bind(this)(event, "passwordField")} />
-          <div className={"button"} onClick={() => { this.handleLogin.bind(this)(userNameField, passwordField)}} >
+          <input value={email}
+                 placeholder={"Email"}
+                 onChange={(event) => this.handleFieldChange(event, "email")} />
+          <input value={password}
+                 type={"password"}
+                 placeholder={"Password"}
+                 onChange={(event) => this.handleFieldChange(event, "password")} />
+          <div className={"button"} onClick={() => { this.handleLogin(email, password)}} >
             <button>Go!</button>
           </div>
           {errorRender}

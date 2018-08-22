@@ -7,7 +7,10 @@ import { SingleDatePicker } from 'react-dates';
 import TimePicker from 'rc-time-picker';
 import Moment from 'moment';
 
+const NUM_DATE_PICKER_MONTHS = 1;
+
 class CreateEvent extends React.Component {
+
   constructor(props) {
     super(props);
     this.state = {
@@ -24,12 +27,12 @@ class CreateEvent extends React.Component {
     }
   }
 
-  toggleEditing() {
+  toggleEditing = () => {
     this.props.dispatch(beginEditingEvent())
-  }
+  };
 
-  createEvent() {
-    var startDateTime = this.state.startDate,
+  createEvent = () => {
+    let startDateTime = this.state.startDate,
         endDateTime = this.state.endDate;
 
     startDateTime.hours(this.state.startTime.hours());
@@ -46,13 +49,13 @@ class CreateEvent extends React.Component {
       startDateTime.toISOString(true),
       this.state.capacityField,
       this.state.descriptionField));
-  }
+  };
 
-  handleFieldChange(event, field) {
+  handleFieldChange = (event, field) => {
     let change = {};
     change[field] = event.target.value;
     this.setState(change);
-  }
+  };
 
   render() {
     const editingClass = this.props.editing ? " editing" : "";
@@ -61,11 +64,9 @@ class CreateEvent extends React.Component {
       return <Redirect to={{ pathname: "/reauth", destination: this.props.location.pathname}}/>
     }
 
-    console.log(this.state);
-
     return(
       <div className={"create-event" + editingClass}>
-        <div className="create-event-button" onClick={() => { this.toggleEditing.bind(this)() }}>
+        <div className="create-event-button" onClick={this.toggleEditing}>
           <p>
             Create Event
           </p>
@@ -77,7 +78,7 @@ class CreateEvent extends React.Component {
                 Name
               </p>
               <input value={this.state.eventNameField}
-                     onChange={(event) => this.handleFieldChange.bind(this)(event, "eventNameField")}/>
+                     onChange={event => this.handleFieldChange(event, "eventNameField")}/>
             </div>
           </div>
           <div className="ce-row">
@@ -90,7 +91,7 @@ class CreateEvent extends React.Component {
                                 focused={this.state.startDateFocused}
                                 onFocusChange={({ focused }) => { this.setState({ startDateFocused: focused }) }}
                                 id={"start-date-picker"}
-                                numberOfMonths={1}
+                                numberOfMonths={NUM_DATE_PICKER_MONTHS}
                                 small={true}
               />
             </div>
@@ -101,9 +102,7 @@ class CreateEvent extends React.Component {
               <TimePicker use12Hours={true}
                           showSecond={false}
                           value={this.state.startTime}
-                          onChange={moment => {
-                            this.setState({ startTime: moment });
-                          }}
+                          onChange={moment => { this.setState({ startTime: moment }) }}
                           />
             </div>
             <div className="ce-input-container short datepicker">
@@ -115,7 +114,7 @@ class CreateEvent extends React.Component {
                                 focused={this.state.endDateFocused}
                                 onFocusChange={({ focused }) => { this.setState({ endDateFocused: focused }) }}
                                 id={"start-date-picker"}
-                                numberOfMonths={1}
+                                numberOfMonths={NUM_DATE_PICKER_MONTHS}
                                 small={true}
               />
             </div>
@@ -126,9 +125,7 @@ class CreateEvent extends React.Component {
               <TimePicker use12Hours={true}
                           showSecond={false}
                           value={this.state.endTime}
-                          onChange={moment => {
-                            this.setState({ endTime: moment });
-                          }}
+                          onChange={moment => { this.setState({ endTime: moment }) }}
                           />
             </div>
           </div>
@@ -138,7 +135,7 @@ class CreateEvent extends React.Component {
                 Place
               </p>
               <input value={this.state.placeField}
-                     onChange={(event) => this.handleFieldChange.bind(this)(event, "placeField")}/>
+                     onChange={event => this.handleFieldChange(event, "placeField")}/>
             </div>
           </div>
           <div className="ce-row">
@@ -147,7 +144,7 @@ class CreateEvent extends React.Component {
                 Description
               </p>
               <textarea value={this.state.descriptionField}
-                        onChange={(event) => this.handleFieldChange.bind(this)(event, "descriptionField")}/>
+                        onChange={event => this.handleFieldChange(event, "descriptionField")}/>
             </div>
           </div>
           <div className="ce-row">
@@ -156,10 +153,9 @@ class CreateEvent extends React.Component {
                 Capacity
               </p>
               <input value={this.state.capacityField}
-                     onChange={(event) => this.handleFieldChange.bind(this)(event, "capacityField")}/>
+                     onChange={event => this.handleFieldChange(event, "capacityField")}/>
             </div>
-            <div className="ce-submit"
-                 onClick={() => { this.createEvent.bind(this)() }}>
+            <div className="ce-submit" onClick={this.createEvent}>
               Create Event
             </div>
           </div>
