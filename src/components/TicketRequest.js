@@ -11,9 +11,9 @@ class TicketRequest extends React.Component {
     }
   }
 
-  requestTicket() {
+  requestTicket = () => {
     this.props.dispatch(requestTicket(this.props.event.id, this.state.emailField));
-  }
+  };
 
   handleFieldChange(event, field) {
     let change = {};
@@ -37,16 +37,18 @@ class TicketRequest extends React.Component {
           <h1>
             Request a ticket for {event.name}
           </h1>
-          <h4>When:<br/>{event.eventTime}</h4>
+          <h5>{event.description}</h5>
+          <h4>Starts:<br/>{event.startTime}</h4>
+          <h4>Ends:<br/>{event.endTime}</h4>
           <h4>Where:<br/>{event.place}</h4>
           <h2>Enter your email to get your ticket:</h2>
           <div className="tr-form">
             <div className="tr-form-input-container">
               <p className="tr-form-subtext">Email:</p>
               <input value={this.state.emailField}
-                     onChange={(event) => this.handleFieldChange.bind(this)(event, "emailField")} />
+                     onChange={(event) => this.handleFieldChange(event, "emailField")} />
             </div>
-            <div className="tr-form-submit" onClick={() => this.requestTicket()}>
+            <div className="tr-form-submit" onClick={this.requestTicket}>
               <p>Give me a ticket!</p>
             </div>
           </div>

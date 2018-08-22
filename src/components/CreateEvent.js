@@ -32,24 +32,35 @@ class CreateEvent extends React.Component {
   };
 
   createEvent = () => {
-    let startDateTime = this.state.startDate,
-        endDateTime = this.state.endDate;
+    let eventName = this.state.eventNameField,
+        place = this.state.placeField,
+        capacity = this.state.capacityField,
+        startDate = this.state.startDate,
+        endDate = this.state.endDate,
+        startTime = this.state.startTime,
+        endTime = this.state.endTime;
 
-    startDateTime.hours(this.state.startTime.hours());
-    startDateTime.minutes(this.state.startTime.minutes());
-    startDateTime.seconds(this.state.startTime.seconds());
+    if (eventName && place && capacity && startDate && endDate && startTime && endTime) {
+      let description = this.state.descriptionField; //not mandatory, or is it?
 
-    endDateTime.hours(this.state.endTime.hours());
-    endDateTime.minutes(this.state.endTime.minutes());
-    endDateTime.seconds(this.state.endTime.seconds());
-
-    this.props.dispatch(createEvent(this.state.eventNameField,
-      this.state.placeField,
-      startDateTime.toISOString(true),
-      startDateTime.toISOString(true),
-      this.state.capacityField,
-      this.state.descriptionField));
+      this.props.dispatch(createEvent(eventName,
+        place,
+        this.addTimeToDate(startDate, startTime).toISOString(true),
+        this.addTimeToDate(endDate, endTime).toISOString(true),
+        capacity,
+        description));
+    } else {
+      alert('Please fill out all necessary fields!');
+    }
   };
+
+  addTimeToDate(date, time) {
+    date.hours(time.hours());
+    date.minutes(time.minutes());
+    date.seconds(time.seconds());
+
+    return date;
+  }
 
   handleFieldChange = (event, field) => {
     let change = {};
@@ -153,6 +164,8 @@ class CreateEvent extends React.Component {
                 Capacity
               </p>
               <input value={this.state.capacityField}
+                     type={"number"}
+                     min={"0"}
                      onChange={event => this.handleFieldChange(event, "capacityField")}/>
             </div>
             <div className="ce-submit" onClick={this.createEvent}>
