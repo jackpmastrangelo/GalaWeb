@@ -1,5 +1,5 @@
-import EventApi from '../api/gala/EventApi';
-import { sessionCredentialsExpired } from './Session';
+import EventApi from '../../api/gala/EventApi';
+import { sessionCredentialsExpired } from '../Session';
 
 //Action Types
 const FETCH_EVENTS_API_REQUEST = "FETCH_EVENTS_API_REQUEST", //Waiting for server response

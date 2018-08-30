@@ -1,4 +1,4 @@
-import EventApi from '../api/gala/EventApi';
+import EventApi from '../../api/gala/EventApi';
 
 //Action Types
 const FETCH_EVENT_DETAILS_API_REQUEST = "FETCH_EVENT_DETAILS_API_REQUEST", //Waiting for server response

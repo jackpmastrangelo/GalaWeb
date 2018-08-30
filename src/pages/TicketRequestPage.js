@@ -1,7 +1,7 @@
 import React from 'react';
 import NavPage from "../components/NavPage";
 import { connect } from 'react-redux';
-import { fetchEventDetails } from "../state/fetchEventDetailsState";
+import { fetchEventDetails } from "../state/apiState/fetchEventDetailsState";
 import LoadingSpinner from "../components/LoadingSpinner";
 import TicketRequest from "../components/TicketRequest";
 

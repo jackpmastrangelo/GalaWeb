@@ -1,7 +1,7 @@
 import React from 'react';
 import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux'
-import { login } from "../state/loginState";
+import { login } from "../state/apiState/loginState";
 import { Session } from "../state/Session";
 
 //This component is a standard login component for Gala.

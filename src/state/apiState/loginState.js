@@ -1,7 +1,7 @@
 
 //Action Types
-import AccountApi from "../api/gala/AccountApi";
-import { Session, sessionNewCredentials } from "./Session";
+import AccountApi from "../../api/gala/AccountApi";
+import { Session, sessionNewCredentials } from "../Session";
 
 const LOGIN_REQUEST = "LOGIN_REQUEST",
       LOGIN_RESPONSE_OK = "LOGIN_RESPONSE_OK",

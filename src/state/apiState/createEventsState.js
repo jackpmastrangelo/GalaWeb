@@ -1,6 +1,6 @@
-import EventApi from "../api/gala/EventApi";
+import EventApi from "../../api/gala/EventApi";
 import { fetchEvents } from "./fetchEventsState";
-import { sessionCredentialsExpired } from './Session';
+import { sessionCredentialsExpired } from '../Session';
 
 //Action Types
 const CREATE_EVENT_API_REQUEST = "CREATE_EVENT_API_REQUEST",

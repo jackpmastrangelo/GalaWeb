@@ -1,4 +1,4 @@
-import TicketApi from '../api/gala/TicketApi';
+import TicketApi from '../../api/gala/TicketApi';
 
 //Action types
 const REQUEST_TICKET_API_REQUEST = "REQUEST_TICKET_API_REQUEST",

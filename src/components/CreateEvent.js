@@ -1,7 +1,7 @@
 import React from 'react';
 import {connect} from "react-redux";
 import '../styles/components/CreateEvent.scss'
-import {createEvent, beginEditingEvent} from "../state/createEventsState";
+import {createEvent, beginEditingEvent} from "../state/apiState/createEventsState";
 import { Redirect } from 'react-router';
 import { SingleDatePicker } from 'react-dates';
 import TimePicker from 'rc-time-picker';

@@ -9,6 +9,7 @@ import ReAuth from "./pages/ReAuth";
 import 'react-dates/initialize';
 import 'react-dates/lib/css/_datepicker.css';
 import 'rc-time-picker/assets/index.css';
+import Planning from "./pages/Planning";
 
 class App extends Component {
   render() {
@@ -21,6 +22,7 @@ class App extends Component {
         <Route path="/reauth"
                component={ReAuth} />
         <Route path="/request-ticket/:eventId" component={TicketRequestPage} />
+        <Route path="/planning" component={Planning}/>
       </Switch>
     );
   }

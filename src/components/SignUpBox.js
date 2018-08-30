@@ -2,7 +2,7 @@ import React from 'react'
 import LoadingSpinner from "./LoadingSpinner";
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
-import { createAccount } from "../state/createAccountState";
+import { createAccount } from "../state/apiState/createAccountState";
 
 class SignUpBox extends React.Component {
   constructor(props) {

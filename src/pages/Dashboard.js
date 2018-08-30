@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { fetchEvents } from "../state/fetchEventsState";
+import { fetchEvents } from "../state/apiState/fetchEventsState";
 import NavPage from "../components/NavPage";
 import EventList from "../components/EventList";
 import LoadingSpinner from "../components/LoadingSpinner";

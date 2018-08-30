@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { requestTicket } from "../state/requestTicketState";
+import { requestTicket } from "../state/apiState/requestTicketState";
 import '../styles/components/TicketRequest.scss'
 
 class TicketRequest extends React.Component {

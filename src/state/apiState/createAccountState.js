@@ -1,6 +1,6 @@
-import AccountApi from '../api/gala/AccountApi';
+import AccountApi from '../../api/gala/AccountApi';
 import { newLogin } from "./loginState";
-import {sessionNewCredentials} from "./Session";
+import {sessionNewCredentials} from "../Session";
 
 //Action Types
 const CREATE_ACCOUNT_REQUEST = "CREATE_ACCOUNT_REQUEST",

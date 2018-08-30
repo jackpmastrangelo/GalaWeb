@@ -1,0 +1,19 @@
+@import "../variables";
+
+.planning-name {
+  text-align: center;
+
+  input, textarea {
+    box-shadow: none;
+    background-color: $secondary-color;
+    color: white;
+    border: none;
+    border-bottom: 1px white solid;
+    font-size: 36px;
+    padding: 0;
+    text-align: center;
+    &.number {
+      width: 40px;
+    }
+  }
+}
