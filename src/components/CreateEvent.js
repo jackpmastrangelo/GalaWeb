@@ -41,14 +41,21 @@ class CreateEvent extends React.Component {
         endTime = this.state.endTime;
 
     if (eventName && place && capacity && startDate && endDate && startTime && endTime) {
-      let description = this.state.descriptionField; //not mandatory, or is it?
+      let description = this.state.descriptionField; //not mandatory
 
-      this.props.dispatch(createEvent(eventName,
-        place,
-        this.addTimeToDate(startDate, startTime).toISOString(true),
-        this.addTimeToDate(endDate, endTime).toISOString(true),
-        capacity,
-        description));
+      let eventStart = this.addTimeToDate(startDate, startTime);
+      let eventEnd = this.addTimeToDate(endDate, endTime);
+
+      if (eventStart.isSameOrBefore(eventEnd)) {
+        this.props.dispatch(createEvent(eventName,
+          place,
+          eventStart.toISOString(true),
+          eventEnd.toISOString(true),
+          capacity,
+          description));
+      } else {
+        alert('The end time of your event must be at or after the start time.')
+      }
     } else {
       alert('Please fill out all necessary fields!');
     }
@@ -63,9 +70,7 @@ class CreateEvent extends React.Component {
   }
 
   handleFieldChange = (event, field) => {
-    let change = {};
-    change[field] = event.target.value;
-    this.setState(change);
+    this.setState({[field] : event.target.value});
   };
 
   render() {

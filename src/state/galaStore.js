@@ -40,5 +40,3 @@ const rootReducer = (state, action) => {
 };
 
 export const galaStore = createStore(rootReducer, applyMiddleware(thunk, loggerMiddleware));
-
-

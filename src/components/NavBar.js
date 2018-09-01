@@ -51,6 +51,7 @@ class NavBar extends React.Component {
   }
 }
 
+//Only necessary to provide props.dispatch for logout, doesn't need state
 function mapStateToProps(state) {
   return {};
 }

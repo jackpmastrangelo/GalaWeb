@@ -9,16 +9,18 @@ class LoginBox extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      email: "",
-      password: ""
+      emailField: "",
+      passwordField: "",
+      errorMessage: ""
     }
   }
 
   handleLogin = (email, password) => {
     if (email && password) {
+      this.setState({errorMessage: ""});
       this.props.dispatch(login(email, password));
     } else {
-
+      this.setState({errorMessage: "Please fill out both email and password fields!"});
     }
   };
 
@@ -28,18 +30,30 @@ class LoginBox extends React.Component {
     this.setState(change);
   };
 
-  render() {
-    const email = this.state.email,
-          password = this.state.password,
-          success = Session.sessionExists(),
-          errorRender = this.props.error
-            ? (<h4>
-                {this.props.errorMessage}
-              </h4>)
-            : undefined;
+  //TODO Might be able to create an abstract form component that does the error handling with state
+  // these two methods are the exact same in LoginBox and SignUpBox
+  renderErrorMessage() {
+    if (this.state.errorMessage) {
+      return (
+        <h4>{this.state.errorMessage}</h4>
+      );
+    }
+  }
 
-    return(
-      success ?
+  componentDidUpdate() {
+    const propsErrorMessage = this.props.errorMessage;
+    const currErrorMessage = this.state.errorMessage;
+    if (propsErrorMessage && currErrorMessage !== propsErrorMessage) {
+      this.setState({errorMessage: propsErrorMessage});
+    }
+  }
+
+  render() {
+    const email = this.state.emailField,
+          password = this.state.passwordField;
+
+    return (
+      Session.sessionExists() ?
       <Redirect to={this.props.destination} />
       : (
         <div className="login-box">
@@ -47,15 +61,15 @@ class LoginBox extends React.Component {
           <h3>Please enter your login information below:</h3>
           <input value={email}
                  placeholder={"Email"}
-                 onChange={(event) => this.handleFieldChange(event, "email")} />
+                 onChange={(event) => this.handleFieldChange(event, "emailField")} />
           <input value={password}
                  type={"password"}
                  placeholder={"Password"}
-                 onChange={(event) => this.handleFieldChange(event, "password")} />
+                 onChange={(event) => this.handleFieldChange(event, "passwordField")} />
           <div className={"button"} onClick={() => { this.handleLogin(email, password)}} >
             <button>Go!</button>
           </div>
-          {errorRender}
+          {this.renderErrorMessage()}
         </div>
       )
     )

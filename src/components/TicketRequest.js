@@ -26,7 +26,7 @@ class TicketRequest extends React.Component {
     let informationText = undefined;
 
     if (this.props.success) {
-      informationText = "Success! A ticket was sent to your email.";
+      informationText = "Success! A ticket was sent to your emailField.";
     } else if (this.props.error) {
       informationText = this.props.errorMessage;
     }
