@@ -40,8 +40,19 @@ export function requestTicket(eventId, email) {
         dispatch(requestTicketSuccess(response.data))
       })
       .catch(error => {
-        dispatch(requestTicketError("Something went wrong requesting a ticket."))
+        dispatch(requestTicketError(interpretError(error.response)))
       })
+  }
+}
+
+function interpretError(response) {
+  switch (response.status) {
+    case 409:
+      return "Sorry! The capacity for this event has been reached";
+    case 404:
+      return "The event id you requested does not exist or may have been deleted.";
+    default:
+      return "Uh oh. Something went wrong. Please try again and let us know!";
   }
 }
 

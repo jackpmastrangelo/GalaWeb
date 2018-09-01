@@ -59,7 +59,7 @@ function interpretError(response) {
     case 400:
       return "The email or password you entered is incorrect. Please try again!";
     default:
-      return "Uh oh. Something went wrong. Please try again or let us know!";
+      return "Uh oh. Something went wrong. Please try again and let us know!";
   }
 }
 

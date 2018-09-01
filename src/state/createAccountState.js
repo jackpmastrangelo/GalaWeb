@@ -53,7 +53,7 @@ function interpretError(response) {
     case 400:
       return "The email you've entered is invalid :(";
     default:
-      return "Uh oh. Something went wrong. Please try again or let us know!";
+      return "Uh oh. Something went wrong. Please try again and let us know!";
   }
 }
 
