@@ -4,7 +4,7 @@ import LoginBox from '../components/LoginBox';
 
 export default class ReAuth extends React.Component {
   render() {
-    var destination = undefined;
+    let destination = undefined;
 
     if (this.props.location && this.props.location.destination) {
       destination = this.props.location.destination;

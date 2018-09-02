@@ -18,8 +18,7 @@ class App extends Component {
         <Route path="/signup" component={SignUp} />
         <Route path="/dashboard"
                render={(props) => <AuthenticatedPage {...props} subComponent={<EventDash />} />} />
-        <Route path="/reauth"
-               component={ReAuth} />
+        <Route path="/reauth" component={ReAuth} />
         <Route path="/request-ticket/:eventId" component={TicketRequestPage} />
       </Switch>
     );
